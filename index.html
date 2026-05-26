@@ -233,8 +233,6 @@ var RK='c5e138dfe2957e304d3a3df2a6fabe48';
 
 // ── 地图 ──────────────────────────────────────
 var map=new AMap.Map('map',{center:[118.8028,32.0915],zoom:16,minZoom:14,maxZoom:19,mapStyle:'amap://styles/normal',viewMode:'2D'});
-// 动物园边界
-new AMap.Polygon({path:[[118.7980,32.0945],[118.8070,32.0945],[118.8070,32.0875],[118.7980,32.0875]],strokeColor:'#4a8c3f',strokeWeight:3,strokeOpacity:0.7,fillColor:'#e8f5e0',fillOpacity:0.25,strokeStyle:'dashed',strokeDasharray:[10,6]}).setMap(map);
 
 // WGS→GCJ转换
 function wgs2gcj(lng,lat){if(lng<72||lng>138||lat<0.8||lat>56)return[lng,lat];var p=Math.PI,ee=0.006693421622965943,a=6378245;function tL(x,y){var r=-100+2*x+3*y+0.2*y*y+0.1*x*y+0.2*Math.sqrt(Math.abs(x));r+=(20*Math.sin(6*x*p)+20*Math.sin(2*x*p))*2/3;r+=(20*Math.sin(y*p)+40*Math.sin(y/3*p))*2/3;r+=(160*Math.sin(y/12*p)+320*Math.sin(y*p/30))*2/3;return r}function tN(x,y){var r=300+x+2*y+0.1*x*x+0.1*x*y+0.1*Math.sqrt(Math.abs(x));r+=(20*Math.sin(6*x*p)+20*Math.sin(2*x*p))*2/3;r+=(20*Math.sin(x*p)+40*Math.sin(x/3*p))*2/3;r+=(150*Math.sin(x/12*p)+300*Math.sin(x/30*p))*2/3;return r}var dL=tL(lng-105,lat-35);var dN=tN(lng-105,lat-35);var rL=lat/180*p;var m=Math.sin(rL);m=1-ee*m*m;var s=Math.sqrt(m);dL=dL*180/((a*(1-ee))/(m*s)*p);dN=dN*180/(a/s*Math.cos(rL)*p);return[lng+dN,lat+dL]}
