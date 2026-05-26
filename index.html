@@ -365,8 +365,7 @@ function refreshLang(){
 
 // ── 二维码 ────────────────────────────────────
 document.getElementById('btnQr').addEventListener('click',function(){
-  var href=window.location.href;
-  if(href.indexOf('http')!==0)href='https://pengchangyun123.github.io/hongshan-zoo';
+  var href='https://pengchangyun123.github.io/hongshan-zoo';
   document.getElementById('qrUrl').textContent=href;
   document.getElementById('qrImg').src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(href);
   document.getElementById('qrPopup').style.display='flex';
