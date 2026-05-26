@@ -241,8 +241,21 @@ var bc=document.getElementById('btnCollect');
 bc.addEventListener('click',function(){S.cm=!S.cm;S.pm=false;bp.style.background='';bp.style.color='';if(S.cm){bc.style.background='var(--accent)';bc.style.color='white';map.getContainer().style.cursor='crosshair';acm('bot','📍 '+(LANG==='cn'?'点击地图采集坐标':'Tap map to collect'))}else{bc.style.background='';bc.style.color='';map.getContainer().style.cursor=''}});
 
 map.on('click',function(e){
+  if(!S.cm&&!S.pm)return; // 普通模式不拦截，让地图正常交互
   if(S.cm){collect(e.lnglat);S.cm=false;bc.style.background='';bc.style.color='';map.getContainer().style.cursor='';return}
-  if(!S.pm)return;sup(e.lnglat.lng,e.lnglat.lat);S.pm=false;bp.style.background='';bp.style.color='';map.getContainer().style.cursor='';acm('bot',L('startSet')+'（'+S.ulat.toFixed(6)+', '+S.ulng.toFixed(6)+'）')
+  if(S.pm){sup(e.lnglat.lng,e.lnglat.lat);S.pm=false;bp.style.background='';bp.style.color='';map.getContainer().style.cursor='';acm('bot',L('startSet')+'（'+S.ulat.toFixed(6)+', '+S.ulng.toFixed(6)+'）')}
+});
+
+// 手机端采点/选起点——原生touch事件
+document.getElementById('map').addEventListener('click',function(e){
+  if(!S.cm&&!S.pm)return;
+  e.stopPropagation();
+  var mc=document.getElementById('map'),rect=mc.getBoundingClientRect();
+  var x=e.clientX-rect.left,y=e.clientY-rect.top;
+  var lnglat=map.containerToLngLat(new AMap.Pixel(x,y));
+  if(!lnglat)return;
+  if(S.cm){collect(lnglat);S.cm=false;bc.style.background='';bc.style.color='';map.getContainer().style.cursor='';return}
+  if(S.pm){sup(lnglat.lng,lnglat.lat);S.pm=false;bp.style.background='';bp.style.color='';map.getContainer().style.cursor='';acm('bot',L('startSet')+'（'+S.ulat.toFixed(6)+', '+S.ulng.toFixed(6)+'）')}
 });
 
 function sup(lng,lat){if(S.um)S.um.setMap(null);if(S.ac)S.ac.setMap(null);S.ulng=lng;S.ulat=lat;S.um=new AMap.Marker({position:[lng,lat],content:'<div class="user-marker-wrap"><div class="user-dot-outer"><div class="user-dot-inner"></div></div></div>',offset:new AMap.Pixel(-15,-15),zIndex:1000});S.um.setMap(map);S.ac=new AMap.Circle({center:[lng,lat],radius:5,strokeColor:'#4a7c96',strokeWeight:1,strokeOpacity:0.5,fillColor:'#4a7c96',fillOpacity:0.15,strokeStyle:'dashed',strokeDasharray:[3,4]});S.ac.setMap(map);map.setCenter([lng,lat])}
