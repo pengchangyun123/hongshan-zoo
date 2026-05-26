@@ -79,7 +79,9 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-body);co
 .user-marker-wrap .user-dot-outer{width:24px;height:24px;background:rgba(74,124,150,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;animation:pulse 2s infinite}
 .user-marker-wrap .user-dot-inner{width:12px;height:12px;background:var(--blue);border:2px solid white;border-radius:50%;box-shadow:0 0 8px rgba(74,124,150,.5)}
 @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:.5}}
-@media(max-width:768px){.side-panel{width:260px;left:6px;max-height:55vh}.agent-panel{width:calc(100vw - 24px);right:12px;bottom:8px;max-height:380px}.top-bar{padding:6px 12px;gap:8px}.brand h1{font-size:15px}.brand-tag{display:none}.nav-info-bar{bottom:70px;padding:8px 12px;gap:8px}.nav-route-info{font-size:12px}}
+.header-actions.collapsed{display:none!important}
+#btnMenu{display:none}
+@media(max-width:768px){.side-panel{width:260px;left:6px;max-height:55vh}.agent-panel{width:calc(100vw - 24px);right:12px;bottom:8px;max-height:380px}.top-bar{padding:6px 12px;gap:8px}.brand h1{font-size:15px}.brand-tag{display:none}.nav-info-bar{bottom:70px;padding:8px 12px;gap:8px}.nav-route-info{font-size:12px}#btnMenu{display:inline-block!important}.header-actions{max-width:calc(100vw - 80px);overflow-x:auto;flex-wrap:nowrap}}
 @media(max-width:480px){.side-panel{width:240px;left:4px}.chat-messages{max-height:180px}.agent-panel{max-height:340px}.quick-actions{display:none}.nav-info-bar{bottom:80px}}
 </style>
 </head>
@@ -89,7 +91,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-body);co
 
 <header class="top-bar">
   <div class="brand"><span class="brand-icon">🦁</span><h1 id="titleCn">红山动物园</h1><span class="brand-tag">手绘导航</span></div>
-  <div class="header-actions">
+  <div class="header-actions" id="headerActions">
     <button class="btn-sketch" id="btnPickStart"><span class="icon">📌</span> <span class="lbl" data-cn="选起点" data-en="Start">选起点</span></button>
     <button class="btn-sketch" id="btnCollect"><span class="icon">📍</span> <span class="lbl" data-cn="采点" data-en="Collect">采点</span></button>
     <button class="btn-sketch" id="btnDemo" style="border-style:dashed;"><span class="icon">🎓</span> <span class="lbl" data-cn="模拟" data-en="Demo">模拟</span></button>
@@ -97,6 +99,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-body);co
     <button class="btn-sketch" id="btnTogglePanel"><span class="icon">📋</span> <span class="lbl" data-cn="展区" data-en="Exhibits">展区</span></button>
     <button class="btn-sketch" id="btnLang"><span class="icon">🌐</span> EN</button>
   </div>
+  <button class="btn-sketch" id="btnMenu" style="display:none;"><span class="icon">☰</span></button>
 </header>
 
 <div class="side-panel" id="sidePanel">
@@ -153,8 +156,12 @@ var T={
     helpText:'你可以说：<br>• "带我去大熊猫"<br>• "考拉在哪里"<br>• "附近有什么"',
     from:'📍 起点',to:'🏁',dist:'📏',time:'🚶',stepTitle:'📋 路线指引：',
     searchPlaceholder:'搜索展区…',chatPlaceholder:'如：带我去大熊猫 / Take me to Panda',
-    coordHint:'移动鼠标查看坐标 | 右键采集',calibBtn:'🎯 校准',
-    quickPanda:'🐼 大熊猫',quickKoala:'🐨 考拉',quickNearby:'📍 附近'},
+    coordHint:'移动鼠标查看坐标 | 右键/采点',calibBtn:'🎯 校准',
+    quickPanda:'🐼 大熊猫',quickKoala:'🐨 考拉',quickNearby:'📍 附近',
+    collectPrompt:'📍 点击地图采集坐标',collectTitle:'采集点：',collectSave:'💾 保存',collectPlaceholder:'输入展区名称',
+    calibTitle:'选择你当前所在的展区：',navGo:'🧭 导航到这里',navCancel:'✕ 取消',
+    cats:['全部','🐘 哺乳','🐦 鸟类','🦎 爬行','🐒 灵长','🏪 服务'],
+    coordDisplay:'移动鼠标查看坐标 | 右键/采点'},
   en:{panelTitle:'🐾 Zoo Exhibits',agentTitle:'Zoo Assistant',
     welcome:'Hello! Hongshan Zoo Assistant 🦁<br>📌 Pick Start → click map | 🎓 Demo | 📍 GPS<br>Try: "Take me to Panda"<br>试试："带我去大熊猫"',
     setStart:'📌 Click map to set start point',startSet:'📍 Start point set',demoSet:'🎓 Simulated at North Gate',
@@ -165,8 +172,12 @@ var T={
     helpText:'You can say:<br>• "Take me to Panda"<br>• "Where is Koala"<br>• "What\'s nearby"',
     from:'📍 Start',to:'🏁',dist:'📏',time:'🚶',stepTitle:'📋 Directions:',
     searchPlaceholder:'Search exhibits…',chatPlaceholder:'e.g. Take me to Panda',
-    coordHint:'Move mouse for coords | Right-click to collect',calibBtn:'🎯 Calibrate',
-    quickPanda:'🐼 Panda',quickKoala:'🐨 Koala',quickNearby:'📍 Nearby'}
+    coordHint:'Move mouse for coords | Right-click/Collect',calibBtn:'🎯 Calibrate',
+    quickPanda:'🐼 Panda',quickKoala:'🐨 Koala',quickNearby:'📍 Nearby',
+    collectPrompt:'📍 Tap map to collect',collectTitle:'Collect at:',collectSave:'💾 Save',collectPlaceholder:'Enter exhibit name',
+    calibTitle:'Select your current exhibit:',navGo:'🧭 Navigate Here',navCancel:'✕ Cancel',
+    cats:['All','🐘 Mammals','🐦 Birds','🦎 Reptiles','🐒 Primates','🏪 Services'],
+    coordDisplay:'Move for coords | Right-click/Collect'}
 };
 
 // ── 展区数据（中英双语）────────────────────
@@ -221,7 +232,7 @@ function wgs2gcj(lng,lat){if(lng<72||lng>138||lat<0.8||lat>56)return[lng,lat];va
 function mk(loc){var m=new AMap.Marker({position:[loc.lng,loc.lat],content:'<div class="sketch-marker-wrap"><div class="marker-dot"></div><div class="marker-label">'+loc.icon+' '+LN(loc)+'</div></div>',offset:new AMap.Pixel(-60,-8),zIndex:100});m.on('click',function(){sdl(loc)});m._d=loc;return m}
 LOCS.forEach(function(l){var m=mk(l);m.setMap(map);S.mks[l.id]=m});
 
-map.on('mousemove',function(e){document.getElementById('coordDisplay').innerHTML=e.lnglat.lat.toFixed(6)+', '+e.lnglat.lng.toFixed(6)+' | '+L('coordHint')});
+map.on('mousemove',function(e){document.getElementById('coordDisplay').innerHTML=e.lnglat.lat.toFixed(6)+', '+e.lnglat.lng.toFixed(6)+' | '+(LANG==='cn'?'右键/采点':'Right-click/Collect')});
 var cc=[];
 // 右键采集（挂载到整个document）
 document.addEventListener('contextmenu',function(e){var mc=document.getElementById('map');if(!mc.contains(e.target))return;e.preventDefault();var rect=mc.getBoundingClientRect();var x=e.clientX-rect.left,y=e.clientY-rect.top;console.log('右键坐标像素:',x,y);var lnglat=map.containerToLngLat(new AMap.Pixel(x,y));console.log('转换后:',lnglat);if(lnglat)collect(lnglat)});
@@ -233,12 +244,12 @@ var bp=document.getElementById('btnPickStart');
 bp.addEventListener('click',function(){S.pm=!S.pm;if(S.pm){bp.style.background='var(--accent)';bp.style.color='white';map.getContainer().style.cursor='crosshair';acm('bot',L('setStart'))}else{bp.style.background='';bp.style.color='';map.getContainer().style.cursor=''}});
 // 坐标采集（内嵌输入框，手机兼容）
 var collectLat=null,collectLng=null;
-function collect(latlng){collectLat=latlng.lat.toFixed(6);collectLng=latlng.lng.toFixed(6);acm('bot','📍 <b>采集点：</b><code style="font-size:10px;">lng:'+collectLng+', lat:'+collectLat+'</code><br><input id="collectName" placeholder="输入展区名称" style="width:100%;padding:6px;border:1.5px solid var(--ink-faint);border-radius:8px;font-size:13px;margin:6px 0;" onkeydown="if(event.key===\'Enter\')saveCollect()"><br><button onclick="saveCollect()" style="padding:4px 12px;border:1px solid var(--accent);border-radius:12px;background:var(--accent);color:white;cursor:pointer;font-size:12px;">💾 保存</button>')}
+function collect(latlng){collectLat=latlng.lat.toFixed(6);collectLng=latlng.lng.toFixed(6);acm('bot','📍 <b>'+L('collectTitle')+'</b><code style="font-size:10px;">lng:'+collectLng+', lat:'+collectLat+'</code><br><input id="collectName" placeholder="'+L('collectPlaceholder')+'" style="width:100%;padding:6px;border:1.5px solid var(--ink-faint);border-radius:8px;font-size:13px;margin:6px 0;" onkeydown="if(event.key===\'Enter\')saveCollect()"><br><button onclick="saveCollect()" style="padding:4px 12px;border:1px solid var(--accent);border-radius:12px;background:var(--accent);color:white;cursor:pointer;font-size:12px;">'+L('collectSave')+'</button>')}
 function saveCollect(){var input=document.getElementById('collectName');if(!input)return;var n=input.value.trim();if(!n)return;cc.push({name:n,lat:collectLat,lng:collectLng});var h=cc.map(function(c,i){return(i+1)+'. '+c.name+' — lng:'+c.lng+', lat:'+c.lat}).join('<br>');acm('bot','✅ '+n+'<br>📋 <b>'+cc.length+' collected:</b><br>'+h+'<br><button onclick="cpy()" style="padding:4px 12px;border:1.5px solid var(--ink);border-radius:20px;background:var(--paper-dark);cursor:pointer;font-size:12px;">📋 Copy</button><button onclick="ccl()" style="padding:4px 12px;border:1.5px solid var(--ink);border-radius:20px;background:var(--paper-dark);cursor:pointer;font-size:12px;margin-left:4px;">🗑️ Clear</button>');collectLat=null;collectLng=null}
 
 // 采点按钮
 var bc=document.getElementById('btnCollect');
-bc.addEventListener('click',function(){S.cm=!S.cm;S.pm=false;bp.style.background='';bp.style.color='';if(S.cm){bc.style.background='var(--accent)';bc.style.color='white';map.getContainer().style.cursor='crosshair';acm('bot','📍 '+(LANG==='cn'?'点击地图采集坐标':'Tap map to collect'))}else{bc.style.background='';bc.style.color='';map.getContainer().style.cursor=''}});
+bc.addEventListener('click',function(){S.cm=!S.cm;S.pm=false;bp.style.background='';bp.style.color='';if(S.cm){bc.style.background='var(--accent)';bc.style.color='white';map.getContainer().style.cursor='crosshair';acm('bot',L('collectPrompt'))}else{bc.style.background='';bc.style.color='';map.getContainer().style.cursor=''}});
 
 map.on('click',function(e){
   if(!S.cm&&!S.pm)return; // 普通模式不拦截，让地图正常交互
@@ -269,7 +280,7 @@ document.getElementById('btnGps').addEventListener('click',function(){if(!naviga
 document.getElementById('btnCalibrate').addEventListener('click',function(){
   if(!S.ulat){acm('bot',L('calibNeed'));return}
   var btns=LOCS.map(function(l,i){return'<button onclick="doCalib(\''+l.id+'\')" style="display:inline-block;padding:4px 8px;margin:2px;border:1px solid var(--ink-faint);border-radius:12px;background:var(--paper-dark);cursor:pointer;font-size:11px;font-family:var(--font-body);">'+l.icon+' '+LN(l)+'</button>'}).join(' ');
-  acm('bot','<b>'+LANG==='cn'?'选择你当前所在的展区：':'Select your current exhibit:'+'</b><br><br>'+btns);
+  acm('bot','<b>'+L('calibTitle')+'</b><br><br>'+btns);
 });
 
 function doCalib(id){
@@ -304,24 +315,55 @@ function fln(name){var clean=name.replace(/[的地点了吗在哪里去带我怎
 function paq(input){if(!input)return;var q=input.trim();if(!q)return;acm('user',q);var isNav=/带我去|导航|怎么去|去往|走到|take me|navigate|go to|head to|walk to/i.test(q),isWhere=/在哪里|在哪|位置|where is|find|locate/i.test(q),isNearby=/附近|周边|最近|nearby|closest|near me|what'?s around/i.test(q),tl=null;if(isNav||isWhere){tl=fln(q);if(tl&&isNav){nav2(tl);return}if(tl&&isWhere){map.setCenter([tl.lng,tl.lat]);map.setZoom(18);hl(tl.id);acm('bot','📍 <strong>'+LN(tl)+'</strong><br>'+LD(tl));return}}if(q.indexOf('熊猫')>-1||q.toLowerCase().indexOf('panda')>-1)tl=LOCS.find(function(l){return l.id==='panda'});else if(q.indexOf('考拉')>-1||q.toLowerCase().indexOf('koala')>-1)tl=LOCS.find(function(l){return l.id==='koala'});else if(q.indexOf('老虎')>-1||q.indexOf('虎')>-1||q.toLowerCase().indexOf('tiger')>-1)tl=LOCS.find(function(l){return l.id==='tiger'});else if(q.indexOf('大象')>-1||q.indexOf('象')>-1||q.toLowerCase().indexOf('elephant')>-1)tl=LOCS.find(function(l){return l.id==='elephant'});else if(q.indexOf('河马')>-1||q.toLowerCase().indexOf('hippo')>-1)tl=LOCS.find(function(l){return l.id==='hippo'});else if(q.indexOf('狼')>-1||q.toLowerCase().indexOf('wolf')>-1)tl=LOCS.find(function(l){return l.id==='wolf'});else if(q.indexOf('熊')>-1||q.toLowerCase().indexOf('bear')>-1)tl=LOCS.find(function(l){return l.id==='bear'});if(tl&&isNav){nav2(tl);return}if(tl){map.setCenter([tl.lng,tl.lat]);map.setZoom(18);hl(tl.id);acm('bot','📍 <strong>'+LN(tl)+'</strong><br>'+LD(tl));sdl(tl);return}if(isNearby){if(!S.ulat){acm('bot','⚠️ Please set start point first');return}var nearby=LOCS.map(function(l){return Object.assign({},l,{distance:haversine(S.ulat,S.ulng,l.lat,l.lng)})}).sort(function(a,b){return a.distance-b.distance}).slice(0,5);var lines=nearby.map(function(l,i){var d=l.distance<1000?Math.round(l.distance)+'m':(l.distance/1000).toFixed(1)+'km';return(i+1)+'. '+l.icon+' <strong>'+LN(l)+'</strong> — '+b2d(bearing(S.ulat,S.ulng,l.lat,l.lng))+' '+d});acm('bot',L('nearbyTitle')+'<br><br>'+lines.join('<br>')+'<br><br>'+L('nearbyHint'));return}acm('bot',L('helpText'))}
 
 // ── 语言切换 ──────────────────────────────────
-document.getElementById('btnLang').addEventListener('click',function(){
-  LANG=LANG==='cn'?'en':'cn';
-  this.textContent=LANG==='cn'?'🌐 EN':'🌐 中文';
+function refreshLang(){
   document.getElementById('panelTitle').textContent=L('panelTitle');
   document.getElementById('agentTitle').textContent=L('agentTitle');
   document.getElementById('welcomeMsg').innerHTML=L('welcome');
   document.getElementById('searchInput').placeholder=L('searchPlaceholder');
   document.getElementById('chatInput').placeholder=L('chatPlaceholder');
+  document.getElementById('coordDisplay').innerHTML=(LANG==='cn'?'移动鼠标查看坐标 | 右键/采点':'Move for coords | Right-click/Collect');
   var labels=document.querySelectorAll('.lbl');
   for(var i=0;i<labels.length;i++){labels[i].textContent=labels[i].dataset[LANG]}
+  // 分类按钮
+  var cats=document.querySelectorAll('.cat-chip');
+  cats[0].textContent=LANG==='cn'?'全部':'All';
+  cats[1].textContent=LANG==='cn'?'🐘 哺乳':'🐘 Mammals';
+  cats[2].textContent=LANG==='cn'?'🐦 鸟类':'🐦 Birds';
+  cats[3].textContent=LANG==='cn'?'🦎 爬行':'🦎 Reptiles';
+  cats[4].textContent=LANG==='cn'?'🐒 灵长':'🐒 Primates';
+  cats[5].textContent=LANG==='cn'?'🏪 服务':'🏪 Services';
+  // 快捷按钮
   var qbs=document.querySelectorAll('.quick-btn[data-cmd]');
   if(qbs[1])qbs[1].textContent=LANG==='cn'?'🐼 大熊猫':'🐼 Panda';
   if(qbs[2])qbs[2].textContent=LANG==='cn'?'🐨 考拉':'🐨 Koala';
   if(qbs[3])qbs[3].textContent=LANG==='cn'?'📍 附近':'📍 Nearby';
+  // 导航栏
+  document.getElementById('navFrom').textContent=L('from');
+  // 刷新标记
+  LOCS.forEach(function(loc){var m=S.mks[loc.id];if(m){m.setContent('<div class="sketch-marker-wrap"><div class="marker-dot"></div><div class="marker-label">'+loc.icon+' '+LN(loc)+'</div></div>')}});
+  // 弹窗按钮
+  var goBtn=document.getElementById('popupGo');
+  if(goBtn)goBtn.textContent=LANG==='cn'?'🧭 导航到这里':'🧭 Navigate Here';
+  var cancelBtn=document.getElementById('btnCancelNav');
+  if(cancelBtn)cancelBtn.textContent=LANG==='cn'?'✕ 取消':'✕ Cancel';
+  var calibrateBtn=document.getElementById('btnCalibrate');
+  if(calibrateBtn)calibrateBtn.textContent=LANG==='cn'?'🎯 校准':'🎯 Calibrate';
   rl(S.acat);
-  // 刷新标记标签
-  LOCS.forEach(function(loc){var m=S.mks[loc.id];if(m){m.setContent('<div class="sketch-marker-wrap"><div class="marker-dot"></div><div class="marker-label">'+loc.icon+' '+LN(loc)+'</div></div>')}})
   acm('bot',LANG==='cn'?'已切换为中文':'Switched to English');
+}
+
+document.getElementById('btnLang').addEventListener('click',function(){
+  LANG=LANG==='cn'?'en':'cn';
+  this.textContent=LANG==='cn'?'🌐 EN':'🌐 中文';
+  refreshLang();
+});
+
+// ── 菜单折叠 ──────────────────────────────────
+var btnMenu=document.getElementById('btnMenu');
+var headerActions=document.getElementById('headerActions');
+btnMenu.addEventListener('click',function(){
+  headerActions.classList.toggle('collapsed');
+  this.textContent=headerActions.classList.contains('collapsed')?'☰':'✕';
 });
 
 // ── 事件 ──────────────────────────────────────
