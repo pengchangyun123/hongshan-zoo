@@ -222,7 +222,9 @@ LOCS.forEach(function(l){var m=mk(l);m.setMap(map);S.mks[l.id]=m});
 
 map.on('mousemove',function(e){document.getElementById('coordDisplay').innerHTML=e.lnglat.lat.toFixed(6)+', '+e.lnglat.lng.toFixed(6)+' | '+L('coordHint')});
 var cc=[];
-map.on('rightclick',function(e){var lat=e.lnglat.lat.toFixed(6),lng=e.lnglat.lng.toFixed(6);var n=prompt('Enter location name:');if(!n)return;cc.push({name:n,lat:lat,lng:lng});var h=cc.map(function(c,i){return(i+1)+'. '+c.name+' — lng:'+c.lng+', lat:'+c.lat}).join('<br>');acm('bot','✅ '+n+'<br><code style="font-size:10px;">lng:'+lng+', lat:'+lat+'</code><br><br>📋 <b>'+cc.length+' collected:</b><br>'+h+'<br><button onclick="cpy()" style="padding:4px 12px;border:1.5px solid var(--ink);border-radius:20px;background:var(--paper-dark);cursor:pointer;font-size:12px;">📋 Copy</button><button onclick="ccl()" style="padding:4px 12px;border:1.5px solid var(--ink);border-radius:20px;background:var(--paper-dark);cursor:pointer;font-size:12px;margin-left:4px;">🗑️ Clear</button>')});
+map.on('rightclick',function(e){collect(e.lnglat)});
+map.on('dblclick',function(e){collect(e.lnglat)});
+function collect(latlng){var lat=latlng.lat.toFixed(6),lng=latlng.lng.toFixed(6);var n=prompt('输入展区名称 / Enter exhibit name:');if(!n)return;cc.push({name:n,lat:lat,lng:lng});var h=cc.map(function(c,i){return(i+1)+'. '+c.name+' — lng:'+c.lng+', lat:'+c.lat}).join('<br>');acm('bot','✅ '+n+'<br><code style="font-size:10px;">lng:'+lng+', lat:'+lat+'</code><br><br>📋 <b>'+cc.length+' collected:</b><br>'+h+'<br><button onclick="cpy()" style="padding:4px 12px;border:1.5px solid var(--ink);border-radius:20px;background:var(--paper-dark);cursor:pointer;font-size:12px;">📋 Copy</button><button onclick="ccl()" style="padding:4px 12px;border:1.5px solid var(--ink);border-radius:20px;background:var(--paper-dark);cursor:pointer;font-size:12px;margin-left:4px;">🗑️ Clear</button>')}
 function cpy(){var t=cc.map(function(c){return c.name+'：'+c.lat+', '+c.lng}).join('\n');navigator.clipboard.writeText(t).then(function(){acm('bot',L('copied'))})}
 function ccl(){cc=[];acm('bot',L('cleared'))}
 
