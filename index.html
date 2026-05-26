@@ -223,8 +223,8 @@ LOCS.forEach(function(l){var m=mk(l);m.setMap(map);S.mks[l.id]=m});
 
 map.on('mousemove',function(e){document.getElementById('coordDisplay').innerHTML=e.lnglat.lat.toFixed(6)+', '+e.lnglat.lng.toFixed(6)+' | '+L('coordHint')});
 var cc=[];
-// 右键采集（原生DOM事件）
-document.getElementById('map').addEventListener('contextmenu',function(e){e.preventDefault();var rect=e.target.getBoundingClientRect();var x=e.clientX-rect.left,y=e.clientY-rect.top;console.log('右键坐标像素:',x,y);var lnglat=map.containerToLngLat(new AMap.Pixel(x,y));console.log('转换后:',lnglat);if(lnglat)collect(lnglat)});
+// 右键采集（挂载到整个document）
+document.addEventListener('contextmenu',function(e){var mc=document.getElementById('map');if(!mc.contains(e.target))return;e.preventDefault();var rect=mc.getBoundingClientRect();var x=e.clientX-rect.left,y=e.clientY-rect.top;console.log('右键坐标像素:',x,y);var lnglat=map.containerToLngLat(new AMap.Pixel(x,y));console.log('转换后:',lnglat);if(lnglat)collect(lnglat)});
 function cpy(){var t=cc.map(function(c){return c.name+'：'+c.lat+', '+c.lng}).join('\n');navigator.clipboard.writeText(t).then(function(){acm('bot',L('copied'))})}
 function ccl(){cc=[];acm('bot',L('cleared'))}
 
