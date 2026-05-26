@@ -223,7 +223,7 @@ LOCS.forEach(function(l){var m=mk(l);m.setMap(map);S.mks[l.id]=m});
 
 map.on('mousemove',function(e){document.getElementById('coordDisplay').innerHTML=e.lnglat.lat.toFixed(6)+', '+e.lnglat.lng.toFixed(6)+' | '+L('coordHint')});
 var cc=[];
-map.on('rightclick',function(e){collect(e.lnglat)});
+map.on('rightclick',function(e){console.log('右键触发');collect(e.lnglat)});
 function cpy(){var t=cc.map(function(c){return c.name+'：'+c.lat+', '+c.lng}).join('\n');navigator.clipboard.writeText(t).then(function(){acm('bot',L('copied'))})}
 function ccl(){cc=[];acm('bot',L('cleared'))}
 
