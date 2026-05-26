@@ -170,37 +170,32 @@ var T={
 
 // ── 展区数据（中英双语）────────────────────
 var LOCS=[
-  {id:'ode-africa',cn:'非洲之歌',en:'Ode to Africa',cat:'mammal',lng:118.7960,lat:32.0935,icon:'🦒',descCn:'长颈鹿、斑马、角马、犀牛、大猩猩、袋鼠',descEn:'Giraffe, Zebra, Wildebeest, Rhino, Gorilla, Kangaroo'},
-  {id:'tangjiahe',cn:'唐家河',en:'Tangjiahe',cat:'primate',lng:118.7950,lat:32.0940,icon:'🐒',descCn:'川金丝猴、小熊猫',descEn:'Golden Snub-nosed Monkey, Red Panda'},
-  {id:'gaoligong',cn:'高黎贡',en:'Gaoligong',cat:'mammal',lng:118.7945,lat:32.0938,icon:'🦚',descCn:'小熊猫、缅甸蟒、孔雀',descEn:'Red Panda, Burmese Python, Peacock'},
-  {id:'kangaroo',cn:'袋鼠角',en:'Kangaroo Corner',cat:'mammal',lng:118.7955,lat:32.0942,icon:'🦘',descCn:'袋鼠',descEn:'Kangaroo'},
-  {id:'lemur',cn:'狐猴之家',en:"Lemurs' Place",cat:'primate',lng:118.7948,lat:32.0933,icon:'🐵',descCn:'狐猴',descEn:'Lemurs'},
-  {id:'rescue',cn:'野生动物收容救护中心',en:'Wildlife Rescue Center',cat:'service',lng:118.7962,lat:32.0928,icon:'🏥',descCn:'野生动物救护',descEn:'Wildlife Reception & Rescue'},
-  {id:'muntjac',cn:'獐麂坡',en:"Reeves' Muntjac & Water Deer",cat:'mammal',lng:118.7952,lat:32.0930,icon:'🦌',descCn:'小麂、獐',descEn:"Reeves's Muntjac, Chinese Water Deer"},
-  {id:'hornbill',cn:'犀鸟雨林',en:'Hornbill Rainforest',cat:'bird',lng:118.7943,lat:32.0935,icon:'🦜',descCn:'鹦鹉、犀鸟',descEn:'Parrot, Hornbill'},
-  {id:'rare-birds',cn:'珍禽馆',en:'Rare Birds Area',cat:'bird',lng:118.7965,lat:32.0945,icon:'🦩',descCn:'鹤、热带鸟类',descEn:'Crane, Tropical Birds'},
-  {id:'dome',cn:'360球幕影院',en:'360 Dome Theater',cat:'service',lng:118.7958,lat:32.0925,icon:'🎬',descCn:'球幕影院',descEn:'360-Degree Dome Theater'},
-  {id:'north-lake',cn:'北门湖保育区',en:'Northgate Lake Conservation',cat:'service',lng:118.7940,lat:32.0948,icon:'🌿',descCn:'生物多样性保育区',descEn:'Biodiversity Conservation Area'},
-  {id:'gift-shop',cn:'红山文创店',en:'Hongshan Gift Shop',cat:'service',lng:118.7960,lat:32.0922,icon:'🛍️',descCn:'主题文创商品',descEn:'Themed Souvenirs'},
-  {id:'panda',cn:'大熊猫馆',en:'Great Panda Habitat',cat:'mammal',lng:118.7970,lat:32.0945,icon:'🐼',descCn:'大熊猫',descEn:'Giant Panda'},
-  {id:'native',cn:'本土物种保育区',en:'Native Wildlife Conservation',cat:'reptile',lng:118.7968,lat:32.0930,icon:'🐊',descCn:'扬子鳄、小麂、獐',descEn:'Yangzi Alligator, Muntjac, Water Deer'},
-  {id:'meerkat',cn:'细尾獴',en:'Meerkat',cat:'mammal',lng:118.7938,lat:32.0933,icon:'🐾',descCn:'细尾獴',descEn:'Meerkat'},
-  {id:'wolf',cn:'狼馆',en:'Wolf',cat:'mammal',lng:118.7935,lat:32.0938,icon:'🐺',descCn:'狼',descEn:'Wolf'},
-  {id:'macaque',cn:'猕猴世界',en:'Macaque Land',cat:'primate',lng:118.7933,lat:32.0930,icon:'🐒',descCn:'猕猴',descEn:'Macaque'},
-  {id:'tiger',cn:'虎馆',en:'Tiger Habitat',cat:'mammal',lng:118.7940,lat:32.0945,icon:'🐯',descCn:'白虎、东北虎',descEn:'White Tiger, Siberian Tiger'},
-  {id:'feline-cn',cn:'中国猫科馆',en:'Feline in China',cat:'mammal',lng:118.7930,lat:32.0942,icon:'🐱',descCn:'豹猫、猞猁',descEn:'Leopard Cat, Lynx'},
-  {id:'feline-planet',cn:'猫科星球',en:'Feline Planet',cat:'mammal',lng:118.7928,lat:32.0940,icon:'😺',descCn:'猫科动物',descEn:'Feline Species'},
-  {id:'bear',cn:'熊馆',en:'Bear',cat:'mammal',lng:118.7950,lat:32.0948,icon:'🐻',descCn:'棕熊、黑熊',descEn:'Brown Bear, Asiatic Black Bear'},
-  {id:'reptile',cn:'两栖爬行馆',en:'Amphibious Reptile',cat:'reptile',lng:118.7965,lat:32.0938,icon:'🐍',descCn:'鳄鱼、蛇类',descEn:'Crocodile, Snakes'},
-  {id:'elephant',cn:'象馆',en:'Elephant',cat:'mammal',lng:118.7975,lat:32.0940,icon:'🐘',descCn:'大象',descEn:'Elephant'},
-  {id:'koala',cn:'考拉馆',en:'Koala',cat:'mammal',lng:118.7972,lat:32.0935,icon:'🐨',descCn:'考拉',descEn:'Koala'},
-  {id:'central',cn:'中心广场',en:'Central Square',cat:'service',lng:118.7955,lat:32.0932,icon:'⛲',descCn:'中心广场',descEn:'Central Square'},
-  {id:'gondwana',cn:'冈瓦纳',en:'Gondwanaland',cat:'bird',lng:118.7968,lat:32.0942,icon:'🦩',descCn:'火烈鸟',descEn:'Flamingo'},
-  {id:'primate-asia',cn:'亚洲灵长区',en:'Primate of Asia',cat:'primate',lng:118.7945,lat:32.0928,icon:'🦧',descCn:'亚洲灵长类',descEn:'Asian Primates'},
-  {id:'food-plaza',cn:'红山美食广场',en:'Hongshan Food Plaza',cat:'service',lng:118.7955,lat:32.0925,icon:'🍔',descCn:'餐饮广场',descEn:'Food Plaza'},
-  {id:'hippo',cn:'河马馆',en:'Hippopotamus',cat:'mammal',lng:118.7948,lat:32.0925,icon:'🦛',descCn:'河马',descEn:'Hippopotamus'},
-  {id:'nature-school',cn:'多样星球自然学校',en:'School of Natural Land',cat:'service',lng:118.7942,lat:32.0922,icon:'🏫',descCn:'自然教育',descEn:'Nature Education'},
-  {id:'legal-center',cn:'生物多样性司法保护馆',en:'Biodiversity Legal Center',cat:'service',lng:118.7935,lat:32.0935,icon:'⚖️',descCn:'生物多样性保护',descEn:'Biodiversity Protection'}
+  {id:'south-gate',cn:'南门',en:'South Gate',cat:'service',lng:118.8005,lat:32.0880,icon:'🚪',descCn:'动物园南入口',descEn:'Zoo South Entrance'},
+  {id:'east-gate',cn:'东门',en:'East Gate',cat:'service',lng:118.806780,lat:32.092168,icon:'🚪',descCn:'动物园东入口',descEn:'Zoo East Entrance'},
+  {id:'north-gate',cn:'北门',en:'North Gate',cat:'service',lng:118.8000,lat:32.0940,icon:'🚪',descCn:'动物园北入口',descEn:'Zoo North Entrance'},
+  {id:'north-lake',cn:'北门湖保育区',en:'Northgate Lake Conservation',cat:'service',lng:118.800267,lat:32.092982,icon:'🌿',descCn:'生物多样性保育区',descEn:'Biodiversity Conservation Area'},
+  {id:'gift-shop',cn:'红山文创店（北门）',en:'Hongshan Gift Shop',cat:'service',lng:118.800369,lat:32.093773,icon:'🛍️',descCn:'主题文创商品',descEn:'Themed Souvenirs'},
+  {id:'panda',cn:'大熊猫馆',en:'Great Panda Habitat',cat:'mammal',lng:118.801410,lat:32.092900,icon:'🐼',descCn:'大熊猫',descEn:'Giant Panda'},
+  {id:'tangjiahe',cn:'唐家河',en:'Tangjiahe',cat:'primate',lng:118.800890,lat:32.091650,icon:'🐒',descCn:'川金丝猴、小熊猫',descEn:'Golden Snub-nosed Monkey, Red Panda'},
+  {id:'rare-birds',cn:'珍禽馆',en:'Rare Birds Area',cat:'bird',lng:118.798449,lat:32.091546,icon:'🦩',descCn:'鹤、珍稀鸟类',descEn:'Crane, Rare Birds'},
+  {id:'tropical-bird',cn:'热带鸟馆',en:'Tropical Bird',cat:'bird',lng:118.800525,lat:32.091859,icon:'🦜',descCn:'鹦鹉、犀鸟',descEn:'Parrot, Hornbill'},
+  {id:'meerkat',cn:'细尾獴馆',en:'Meerkat',cat:'mammal',lng:118.802054,lat:32.091114,icon:'🐾',descCn:'细尾獴',descEn:'Meerkat'},
+  {id:'wolf',cn:'狼馆',en:'Wolf',cat:'mammal',lng:118.802799,lat:32.092346,icon:'🐺',descCn:'狼',descEn:'Wolf'},
+  {id:'native',cn:'本土物种保育区',en:'Native Wildlife Conservation',cat:'reptile',lng:118.802220,lat:32.091800,icon:'🐊',descCn:'扬子鳄、小麂、獐',descEn:'Yangzi Alligator, Muntjac, Water Deer'},
+  {id:'macaque',cn:'猕猴世界',en:'Macaque Land',cat:'primate',lng:118.803390,lat:32.091482,icon:'🐒',descCn:'猕猴',descEn:'Macaque'},
+  {id:'tiger',cn:'虎馆',en:'Tiger Habitat',cat:'mammal',lng:118.804666,lat:32.092664,icon:'🐯',descCn:'白虎、东北虎',descEn:'White Tiger, Siberian Tiger'},
+  {id:'legal-center',cn:'生物多样性司法保护馆',en:'Biodiversity Legal Center',cat:'service',lng:118.803937,lat:32.093400,icon:'⚖️',descCn:'生物多样性保护',descEn:'Biodiversity Protection'},
+  {id:'feline-planet',cn:'猫科星球',en:'Feline Planet',cat:'mammal',lng:118.805498,lat:32.094386,icon:'😺',descCn:'猫科动物',descEn:'Feline Species'},
+  {id:'feline-cn',cn:'中国猫科馆',en:'Feline in China',cat:'mammal',lng:118.805294,lat:32.092986,icon:'🐱',descCn:'豹猫、猞猁',descEn:'Leopard Cat, Lynx'},
+  {id:'bear',cn:'熊馆',en:'Bear',cat:'mammal',lng:118.806168,lat:32.093550,icon:'🐻',descCn:'棕熊、黑熊',descEn:'Brown Bear, Asiatic Black Bear'},
+  {id:'gaoligong',cn:'高黎贡',en:'Gaoligong',cat:'mammal',lng:118.805680,lat:32.091296,icon:'🦚',descCn:'小熊猫、缅甸蟒、孔雀',descEn:'Red Panda, Burmese Python, Peacock'},
+  {id:'reptile',cn:'两栖爬行馆',en:'Amphibious Reptile',cat:'reptile',lng:118.806302,lat:32.090796,icon:'🐍',descCn:'鳄鱼、蛇类',descEn:'Crocodile, Snakes'},
+  {id:'elephant',cn:'象馆',en:'Elephant',cat:'mammal',lng:118.804940,lat:32.090919,icon:'🐘',descCn:'大象',descEn:'Elephant'},
+  {id:'koala',cn:'考拉馆',en:'Koala',cat:'mammal',lng:118.804393,lat:32.090646,icon:'🐨',descCn:'考拉',descEn:'Koala'},
+  {id:'primate-asia',cn:'亚洲灵长区',en:'Primate of Asia',cat:'primate',lng:118.803985,lat:32.088605,icon:'🦧',descCn:'亚洲灵长类',descEn:'Asian Primates'},
+  {id:'hippo',cn:'河马馆',en:'Hippopotamus',cat:'mammal',lng:118.804264,lat:32.087951,icon:'🦛',descCn:'河马',descEn:'Hippopotamus'},
+  {id:'gondwana',cn:'冈瓦纳',en:'Gondwanaland',cat:'bird',lng:118.805401,lat:32.089042,icon:'🦩',descCn:'火烈鸟',descEn:'Flamingo'},
+  {id:'lemur',cn:'狐猴之家',en:"Lemurs' Place",cat:'primate',lng:118.801174,lat:32.091255,icon:'🐵',descCn:'狐猴',descEn:'Lemurs'}
 ];
 
 var CM={all:{cn:'全部',en:'All'},mammal:{cn:'哺乳',en:'Mammals'},bird:{cn:'鸟类',en:'Birds'},reptile:{cn:'爬行',en:'Reptiles'},primate:{cn:'灵长',en:'Primates'},service:{cn:'服务',en:'Services'}};
@@ -214,9 +209,9 @@ var S={ulng:null,ulat:null,um:null,ac:null,wid:null,mks:{},acat:'all',alid:null,
 var RK='c5e138dfe2957e304d3a3df2a6fabe48';
 
 // ── 地图 ──────────────────────────────────────
-var map=new AMap.Map('map',{center:[118.7953,32.0935],zoom:16,minZoom:14,maxZoom:19,mapStyle:'amap://styles/normal',viewMode:'2D'});
+var map=new AMap.Map('map',{center:[118.8028,32.0915],zoom:16,minZoom:14,maxZoom:19,mapStyle:'amap://styles/normal',viewMode:'2D'});
 // 动物园边界
-new AMap.Polygon({path:[[118.7925,32.0950],[118.7980,32.0950],[118.7980,32.0920],[118.7925,32.0920]],strokeColor:'#4a8c3f',strokeWeight:3,strokeOpacity:0.7,fillColor:'#e8f5e0',fillOpacity:0.25,strokeStyle:'dashed',strokeDasharray:[10,6]}).setMap(map);
+new AMap.Polygon({path:[[118.7980,32.0945],[118.8070,32.0945],[118.8070,32.0875],[118.7980,32.0875]],strokeColor:'#4a8c3f',strokeWeight:3,strokeOpacity:0.7,fillColor:'#e8f5e0',fillOpacity:0.25,strokeStyle:'dashed',strokeDasharray:[10,6]}).setMap(map);
 
 // WGS→GCJ转换
 function wgs2gcj(lng,lat){if(lng<72||lng>138||lat<0.8||lat>56)return[lng,lat];var p=Math.PI,ee=0.006693421622965943,a=6378245;function tL(x,y){var r=-100+2*x+3*y+0.2*y*y+0.1*x*y+0.2*Math.sqrt(Math.abs(x));r+=(20*Math.sin(6*x*p)+20*Math.sin(2*x*p))*2/3;r+=(20*Math.sin(y*p)+40*Math.sin(y/3*p))*2/3;r+=(160*Math.sin(y/12*p)+320*Math.sin(y*p/30))*2/3;return r}function tN(x,y){var r=300+x+2*y+0.1*x*x+0.1*x*y+0.1*Math.sqrt(Math.abs(x));r+=(20*Math.sin(6*x*p)+20*Math.sin(2*x*p))*2/3;r+=(20*Math.sin(x*p)+40*Math.sin(x/3*p))*2/3;r+=(150*Math.sin(x/12*p)+300*Math.sin(x/30*p))*2/3;return r}var dL=tL(lng-105,lat-35);var dN=tN(lng-105,lat-35);var rL=lat/180*p;var m=Math.sin(rL);m=1-ee*m*m;var s=Math.sqrt(m);dL=dL*180/((a*(1-ee))/(m*s)*p);dN=dN*180/(a/s*Math.cos(rL)*p);return[lng+dN,lat+dL]}
